@@ -1,8 +1,13 @@
 const express = require("express");
 const app = express();
+const errors = require("restify-errors");
 const morgan = require("morgan");
 const bodyParser = require("body-parser");
+const cors = require("cors");
+const config = require("./config");
 const mongoose = require("mongoose");
+
+//Routes Definition
 const userRoutes = require("./routes/user");
 
 //logger
@@ -12,30 +17,45 @@ app.use(bodyParser.json());
 
 //CORS Handling
 
-app.use((req, res, next) => {
-  res.header("Access-Control-Allow-Origin", "*");
-  res.header(
-    "Access-Control-Allow-Headers",
-    "Origin, X-Requested-With, Content-Type, Authorization, Accept"
-  );
-
-  if (req.method === "OPTIONS") {
-    res.header("Access-Control-Allow-Methods", "PUT, POST, DELETE, PATCH, GET");
-    res.status(200).json({});
-  }
-  next();
-});
-
+app.use(cors());
 //CORS end
 
 //routes
-app.use("/user", userRoutes);
+app.use("/users", userRoutes);
 
-//rotes  end
+//routes  end
 
-app.use(userRoutes, (req, res, next) => {
-  res.status(200).json({
-    message: "Testing works",
+//MongoDB Connection
+mongoose.connect(config.MONGODB_URI, {
+  useNewUrlParser: true,
+  useUnifiedTopology: true,
+  useFindAndModify: true,
+  useCreateIndex: true,
+});
+
+//Default
+
+const database = mongoose.connection;
+
+//Logging Database Connection Errors to the Console
+
+database.on("error", console.error.bind(console, "Database Connection Error"));
+
+//MongoDB Connection Ends
+
+//Errors
+app.use((req, res, next) => {
+  const error = new Error("Not found");
+  error.status = 404;
+  next(error);
+});
+
+app.use((error, req, res, next) => {
+  res.status(error.status || 500);
+  res.json({
+    error: {
+      message: error.message,
+    },
   });
 });
 

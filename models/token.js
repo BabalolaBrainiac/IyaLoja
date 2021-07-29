@@ -1,7 +1,8 @@
 const mongoose = require("mongoose");
+const { Schema } = mongoose;
 
-const tokenSchema = mongoose.Schema({
-  _id: mongoose.ObjectId,
+const tokenSchema = new mongoose({
+  _id: mongoose.Types.ObjectId,
   name: { type: String, required: true },
 });
 
