@@ -21,6 +21,9 @@ class AppError {
     static badGateway(message) {
         return new AppError(401, message)
     }
+    static notAcceptable(message) {
+        return new AppError(406, message)
+    }
   }
   
   module.exports = AppError;
