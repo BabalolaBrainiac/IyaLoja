@@ -15,4 +15,5 @@ const userSchema = mongoose.Schema({
   portfolio: { type: [], ref: "Token" },
 });
 
+
 module.exports = mongoose.model("User", userSchema);
