@@ -38,4 +38,39 @@ router.post("/signup", (req, res, next) => {
   });
 });
 
+router.get("/", (req, res, next) => {
+  User.find()
+    .populate("portfolio _id username")
+    .exec()
+    .then((users) => {
+      console.log(users);
+      res.status(200).json({
+        count: userss.length,
+        message: users.map((user) => {
+          return {
+            _id: user._id,
+            username: user.username,
+            portfolio: user.portfolio,
+          };
+        }),
+      });
+    })
+    .catch((error) => {
+      return next(new errors.InternalServerError("Unable to get Users"));
+    });
+});
+
+router.delete("/:userId", (req, res, next) => {
+  User.remove({ _id: req.params.userId })
+    .exec()
+    .then((user) => {
+      res.status(200).json({
+        message: "User Deleted",
+      });
+    })
+    .catch((error) => {
+      return next(new errors.InternalServerError("Unable to Delete User"));
+    });
+});
+
 module.exports = router;
