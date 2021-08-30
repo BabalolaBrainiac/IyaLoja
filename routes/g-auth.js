@@ -4,7 +4,6 @@ const mongoose = require("mongoose");
 const User = require("../models/user");
 const passport = require("passport");
 const bcrypt = require("bcrypt");
-const jwt = require("jsonwebtoken");
 const errors = require("restify-errors");
 
 //Login User(Google Auth)
