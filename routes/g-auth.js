@@ -19,11 +19,13 @@ router.get("/logout", (res, req, next) => {
 //Authenticate
 router.get(
   "/authenticate",
-  passport.authenticate("google", { scope: ["profile"] })
+  passport.authenticate("google", {
+    scope: [ 'email', 'profile'],
+  })
 );
 
 //Callback for Google Auth
-router.get("/users", (res, req, next) => {
+router.get("/users", passport.authenticate("google"), (res, req, next) => {
   res.status(200).json("Redirecting User");
 });
 
