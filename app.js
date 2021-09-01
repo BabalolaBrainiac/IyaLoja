@@ -10,8 +10,8 @@ const mongoose = require("mongoose");
 
 //Routes Definition
 const userRoutes = require("./routes/user");
-const authroutes = require("./routes/g-auth");
-
+const authRoutes = require("./routes/g-auth");
+const foodRoutes = require("./routes/food");
 //logger
 app.use(morgan("dev"));
 app.use(bodyParser.urlencoded({ extended: false }));
@@ -23,7 +23,8 @@ app.use(cors());
 
 //routes
 app.use("/users", userRoutes);
-app.use("/auth", authroutes);
+app.use("/auth", authRoutes);
+app.use("/fooditem", foodRoutes);
 
 //MongoDB Connection
 mongoose.connect(config.MONGODB_URI, {
