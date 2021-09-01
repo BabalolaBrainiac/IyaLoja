@@ -1,0 +1,51 @@
+[
+  {
+    "name": "chicken",
+    "token": "CHK",
+    "_id": "1",
+    "totalSupply": "500",
+    "price": "20"
+  },
+  {
+    "name": "beans",
+    "token": "BEA",
+    "_id": "1",
+    "totalSupply": "500",
+    "price": "50"
+  },
+  {
+    "name": "rice",
+    "token": "RCE",
+    "_id": "1",
+    "totalSupply": "500",
+    "price": "10"
+  },
+  {
+    "name": "beef",
+    "token": "BFF",
+    "_id": "1",
+    "totalSupply": "500",
+    "price": "40"
+  },
+  {
+    "name": "onion",
+    "token": "ONI",
+    "_id": "1",
+    "totalSupply": "500",
+    "price": "20"
+  },
+  {
+    "name": "cucumber",
+    "token": "CCM",
+    "_id": "1",
+    "totalSupply": 500,
+    "price": "17"
+  },
+  {
+    "name": "banana",
+    "token": "BBN",
+    "_id": "1",
+    "totalSupply": "500",
+    "price": "15"
+  }
+]
